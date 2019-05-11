@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class MyItemsComponent implements OnInit {
 
   items: Item[] = [];
-  displayedColumns: string[] = ['id', 'category', 'name', 'city'];
+  displayedColumns: string[] = ['id', 'category', 'name', 'city', 'actions'];
 
   constructor(private itemsService: ItemService, private router: Router) { }
 
@@ -21,6 +21,10 @@ export class MyItemsComponent implements OnInit {
 
   createNewItem() {
     this.router.navigate(['/give-something']);
+  }
+
+  deleteItem(element) {
+    this.items = this.items.filter((currItem) => !(currItem.id === element.id));
   }
 
 }
