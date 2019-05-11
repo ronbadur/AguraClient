@@ -1,25 +1,29 @@
-<div class="content-container">
-  <aside>
-    <a routerLink="/">
-      <h2>Agura</h2>
-    </a>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <aside>
+      <a routerLink="/">
+        <h2>Agura</h2>
+      </a>
 
-    <ul>
-      <a routerLink="/my-items">
-        <li>My Items</li>
-      </a>
-      <a routerLink="/give-something">
-        <li>Give Something</li>
-      </a>
-      <a routerLink="/take-something">
-        <li>Take Something</li>
-      </a>
-      <a routerLink="/statistics">
-        <li>Statistics</li>
-      </a>
-    </ul>
-  </aside>
-  <div class="main-content">
+      <ul>
+        <a routerLink="/my-items">
+          <li>My Items</li>
+        </a>
+        <a routerLink="/give-something">
+          <li>Give Something</li>
+        </a>
+        <a routerLink="/take-something">
+          <li>Take Something</li>
+        </a>
+        <a routerLink="/statistics">
+          <li>Statistics</li>
+        </a>
+      </ul>
+    </aside>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

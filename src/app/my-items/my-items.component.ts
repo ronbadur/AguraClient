@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemService } from '../shared/services/item/item.service';
+import { Item } from '../shared/models/Item';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-items',
@@ -7,13 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyItemsComponent implements OnInit {
 
-  constructor() { }
+  items: Item[] = [];
+  displayedColumns: string[] = ['id', 'name', 'city'];
+
+  constructor(private itemsService: ItemService, private router: Router) { }
 
   ngOnInit() {
+    this.items = this.itemsService.fetchItemsByUsername("ronbadur");
   }
 
   createNewItem() {
-    console.log("create new item button just clicked");
+    this.router.navigate(['/give-something']);
   }
 
 }
