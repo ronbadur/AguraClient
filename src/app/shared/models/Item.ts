@@ -5,5 +5,5 @@ export interface Item {
     name: string,
     category: string,
     city: string,
-    owner: User
+    owner?: User
 }

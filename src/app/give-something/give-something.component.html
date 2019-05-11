@@ -1,2 +1,25 @@
-<h2>Give Something</h2>
+<h1>Give Something</h1>
 <hr>
+
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <div class="form-container">
+
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Category" formControlName="category">
+      <mat-option value="phones">Phones</mat-option>
+      <mat-option value="computers">Computers</mat-option>
+      <mat-option value="furnitures">Furnitures</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="City" formControlName="city">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Give Something!</button>
+  </div>
+</form>
