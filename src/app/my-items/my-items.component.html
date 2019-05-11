@@ -15,13 +15,19 @@
     <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
   </ng-container>
 
+  <!-- Category Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+  </ng-container>
+
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- City Column -->
   <ng-container matColumnDef="city">
     <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>

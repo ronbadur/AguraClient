@@ -11,17 +11,20 @@ export class ItemsMock {
     data : Item[] = [{
         id: 1,
         name: "Galaxy s9",
+        category: "Phones",
         city: "Holon",
         owner: this.user
     },{
             id: 2,
             name: "Laptop",
+            category: "Computers",
             city: "Tel Aviv",
             owner: this.user
     },
         {
             id: 3,
-            name: "Television",
+            name: "Couch",
+            category: "Furnitures",
             city: "Kfar Saba",
             owner: this.user
         }];
