@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class MyItemsComponent implements OnInit {
 
   items: Item[] = [];
-  displayedColumns: string[] = ['id', 'name', 'city'];
+  displayedColumns: string[] = ['id', 'category', 'name', 'city'];
 
   constructor(private itemsService: ItemService, private router: Router) { }
 
