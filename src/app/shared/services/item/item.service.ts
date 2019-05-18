@@ -8,6 +8,7 @@ import { Item } from '../../models/Item';
 export class ItemService {
 
   idCounter = 4;
+  public itemToUpdate: Item;
 
   constructor(private mockData: ItemsMock) { }
 
@@ -27,6 +28,10 @@ export class ItemService {
       city: item.city
     })
     this.idCounter++;
-    
+  }
+
+  updateItem(item: Item) {
+    let itemIndex = this.mockData.data.findIndex(currItem => currItem.id === this.itemToUpdate.id);
+    this.mockData.data[itemIndex] = item
   }
 }
