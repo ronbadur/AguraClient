@@ -9,21 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./give-something.component.less']
 })
 export class GiveSomethingComponent implements OnInit {
-
-  itemForm = new FormGroup({
-    category: new FormControl(''),
-    name: new FormControl(''),
-    city: new FormControl(''),
-  });
-
-  constructor(private itemService: ItemService, private router: Router) { }
+  
+  constructor() { }
 
   ngOnInit() {
   }
-
-  onSubmit() {
-    this.itemService.addItem(this.itemForm.value);
-    this.router.navigate(['/my-items']);
-  }
-
 }
