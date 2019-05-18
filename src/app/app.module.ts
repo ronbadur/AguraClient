@@ -10,10 +10,12 @@ import { CommonModule } from '@angular/common';
 import { ItemService } from './shared/services/item/item.service';
 import { ItemsMock } from './shared/data/ItemsMock';
 import { ItemsTableComponent } from './items-table/items-table.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

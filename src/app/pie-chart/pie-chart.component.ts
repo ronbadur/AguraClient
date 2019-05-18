@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ɵConsole } from '@angular/core';
 import * as d3 from 'd3-selection';
 import * as d3Scale from "d3-scale";
 import * as d3Shape from "d3-shape";
@@ -38,7 +38,6 @@ export class PieChartComponent implements OnInit {
   ];
 
   constructor() {
-    
   }
 
   ngOnInit() {

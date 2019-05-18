@@ -13,6 +13,8 @@ import { ItemFormComponent } from 'src/app/item-form/item-form.component';
 import { UpdateItemDialogComponent } from 'src/app/update-item-dialog/update-item-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ItemsTableComponent } from 'src/app/items-table/items-table.component';
+import { FooterComponent } from 'src/app/footer/footer.component';
+import { PieChartComponent } from 'src/app/pie-chart/pie-chart.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -33,7 +35,8 @@ const routes: Routes = [
     ItemFormComponent,
     PageNotFoundComponent,
     UpdateItemDialogComponent,
-    ItemsTableComponent
+    ItemsTableComponent,
+    PieChartComponent
   ],
   entryComponents: [UpdateItemDialogComponent],
   imports: [RouterModule.forRoot(routes), MaterialDesignModule, ReactiveFormsModule, CommonModule],
