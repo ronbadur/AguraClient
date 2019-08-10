@@ -2,13 +2,15 @@ const app = require("express")();
 const http = require('http').Server(app);
 const bodyParser = require("body-parser");
 const cors = require('cors');
-
+const users = require('./controllers/users');
 
 //Declaring Port
 const port = 3000;
 
 // Middleware for CORS
 app.use(cors());
+
+app.use('/api/users', users);
 
 // Middleware for bodyparsing using both json and urlencoding
 app.use(bodyParser.urlencoded({ extended: true }));
