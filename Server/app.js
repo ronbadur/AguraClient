@@ -5,6 +5,7 @@ const cors = require('cors');
 const users = require('./controllers/users');
 const mongoose = require("mongoose");
 const config = require('./configs/db');
+const categories = require('./controllers/categories');
 // Connect mongoose to our database
 mongoose.connect(config.database, {useNewUrlParser: true});
 var db= mongoose.connection;
