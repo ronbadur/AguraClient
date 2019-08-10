@@ -1,0 +1,45 @@
+<div class="search-div">
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="items" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <!-- City Column -->
+  <ng-container matColumnDef="city">
+    <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+  </ng-container>
+
+  <!-- Actions buttons Column -->
+  <ng-container matColumnDef="actions" *ngIf="isEditable">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-icon (click)="editItem(element)">edit</mat-icon>
+      <mat-icon (click)="deleteItem(element)">delete</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

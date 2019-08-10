@@ -1,0 +1,10 @@
+<div class="header-container">
+  <div class="left-container">
+    <h1>My Items</h1>
+  </div>
+  <div class="right-container">
+    <button mat-raised-button color="primary" (click)="createNewItem()">New Item</button>
+  </div>
+</div>
+<hr>
+<items-table [isEditable]="true"></items-table>
