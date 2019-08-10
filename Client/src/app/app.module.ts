@@ -11,13 +11,15 @@ import { ItemService } from './shared/services/item/item.service';
 import { ItemsMock } from './shared/data/ItemsMock';
 import { ItemsTableComponent } from './items-table/items-table.component';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
+import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 // import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    
+    // LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,9 +28,8 @@ import { FooterComponent } from './footer/footer.component';
     MaterialDesignModule,
     ReactiveFormsModule,
     CommonModule,
-    
   ],
-  providers: [ItemService, ItemsMock],
+  providers: [ItemService, SideNavStatusService, ItemsMock],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
