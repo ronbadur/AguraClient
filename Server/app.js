@@ -2,10 +2,13 @@ const app = require("express")();
 const http = require('http').Server(app);
 const bodyParser = require("body-parser");
 const cors = require('cors');
-const users = require('./controllers/users');
+
 const mongoose = require("mongoose");
 const config = require('./configs/db');
+const users = require('./controllers/users');
+const items = require('./controllers/items');
 const categories = require('./controllers/categories');
+
 // Connect mongoose to our database
 mongoose.connect(config.database, {useNewUrlParser: true});
 var db= mongoose.connection;
@@ -22,6 +25,8 @@ const port = 3000;
 app.use(cors());
 
 app.use('/api/users', users);
+app.use('/api/items', items);
+app.use('/api/categories', categories);
 
 // Middleware for bodyparsing using both json and urlencoding
 app.use(bodyParser.urlencoded({ extended: true }));
