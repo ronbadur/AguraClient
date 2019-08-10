@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { MyItemsComponent } from '../../../my-items/my-items.component';
 import { GiveSomethingComponent } from '../../../give-something/give-something.component';
@@ -13,11 +14,12 @@ import { ItemFormComponent } from '../../forms/item-form/item-form.component';
 import { UpdateItemDialogComponent } from 'src/app/update-item-dialog/update-item-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ItemsTableComponent } from 'src/app/items-table/items-table.component';
-import {FormsModule} from '@angular/forms';
 import { PieChartComponent } from '../../../statistics/pie-chart/pie-chart.component';
+import { LoginComponent } from '../../../login/login.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: LoginComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'my-items', component: MyItemsComponent },
   { path: 'give-something', component: GiveSomethingComponent },
   { path: 'take-something', component: TakeSomethingComponent },
@@ -28,6 +30,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomePageComponent,
+    LoginComponent,
     MyItemsComponent,
     GiveSomethingComponent,
     TakeSomethingComponent,
