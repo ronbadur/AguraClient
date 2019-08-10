@@ -13,7 +13,19 @@ mat-sidenav {
 h2 {
     color: white;
     padding: 5px;
+    text-shadow: 2px 2px black;
+    transition: color 1s;
+    font-family: myFirstFont;
 }
+
+h2:hover{
+    color: #CAC8C9 ;
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(../assets/fonts/SansationBold.woff);
+  }
 
 ul {
     list-style-type: none;

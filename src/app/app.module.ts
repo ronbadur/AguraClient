@@ -11,11 +11,13 @@ import { ItemService } from './shared/services/item/item.service';
 import { ItemsMock } from './shared/data/ItemsMock';
 import { ItemsTableComponent } from './items-table/items-table.component';
 import { FooterComponent } from './footer/footer.component';
+// import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     MaterialDesignModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    
   ],
   providers: [ItemService, ItemsMock],
   bootstrap: [AppComponent]
