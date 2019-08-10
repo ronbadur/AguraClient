@@ -34,6 +34,11 @@ module.exports.getUserByMailAndPassword = (mail, password, callback) => {
   return (usersList.findOne(query).populate("items").exec(callback));
 }
 
+module.exports.getUserByMail = (mail, callback) => {
+    let query = { mail: mail };
+    return (usersList.findOne(query).populate("items").exec(callback));
+  }
+
 module.exports.getUserByID = (id, callback) => {
     let query = { _id: id };
     return (usersList.findOne(query).populate("items").exec(callback));
@@ -42,3 +47,17 @@ module.exports.getUserByID = (id, callback) => {
 module.exports.editUser = (editedUser, callback) => usersList.findOneAndUpdate({ mail: editedUser.mail }, editedUser, {upsert: true, new: true, runValidators: true}, callback);
 
 module.exports.addUser = (newUser, callback) => newUser.save(callback);
+
+module.exports.addItemToUser = (item, mail, callback) => {
+    usersList.findOne({ mail }, (err, user) => {
+    if (err || !user || !user.items) {
+      console.error(err);
+      callback(err);
+    }
+    else {
+      user.username = mail;
+      user.items.push(item);
+      user.save(callback);
+    }
+  })
+}
