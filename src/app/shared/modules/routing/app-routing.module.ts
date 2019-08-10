@@ -9,12 +9,12 @@ import { TakeSomethingComponent } from '../../../take-something/take-something.c
 import { StatisticsComponent } from '../../../statistics/statistics.component';
 import { PageNotFoundComponent } from '../../../page-not-found/page-not-found.component';
 import { HomePageComponent } from '../../../home-page/home-page.component';
-import { ItemFormComponent } from 'src/app/item-form/item-form.component';
+import { ItemFormComponent } from 'src/app/shared/forms/item-form/item-form.component';
 import { UpdateItemDialogComponent } from 'src/app/update-item-dialog/update-item-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ItemsTableComponent } from 'src/app/items-table/items-table.component';
 import { FooterComponent } from 'src/app/footer/footer.component';
-import { PieChartComponent } from 'src/app/pie-chart/pie-chart.component';
+import { PieChartComponent } from 'src/app/statistics/pie-chart/pie-chart.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },

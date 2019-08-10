@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ItemFormComponent } from '../item-form/item-form.component';
+import { ItemFormComponent } from '../shared/forms/item-form/item-form.component';
 import { Item } from '../shared/models/Item';
 import { ItemService } from '../shared/services/item/item.service';
 
