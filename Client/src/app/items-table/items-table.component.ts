@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatTable, MatDialog } from '@angular/material';
+import {MatTable, MatDialog, MatTableDataSource} from '@angular/material';
 import { Item } from '../shared/models/Item';
 import { ItemService } from '../shared/services/item/item.service';
 import { Router } from '@angular/router';
@@ -15,12 +15,15 @@ export class ItemsTableComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() isEditable: boolean;
   items: Item[] = [];
+  dataSource;
   displayedColumns: string[] = ['id', 'category', 'name', 'city'];
+  searchQuery: string;
 
   constructor(private itemsService: ItemService, private router: Router, private dialogService: MatDialog) { }
 
   ngOnInit() {
     this.items = this.itemsService.fetchItemsByUsername('ronbadur');
+    this.dataSource = new MatTableDataSource(this.items);
     if (this.isEditable) {
       this.displayedColumns.push('actions');
     }
@@ -28,6 +31,7 @@ export class ItemsTableComponent implements OnInit {
 
   deleteItem(element) {
     this.items = this.items.filter((currItem) => !(currItem.id === element.id));
+    this.dataSource.data = this.items;
   }
 
   editItem(element) {
@@ -42,6 +46,15 @@ export class ItemsTableComponent implements OnInit {
         this.table.renderRows();
       }
     });
+  }
+
+  onSearchClear() {
+    this.searchQuery = '';
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
 
 }
