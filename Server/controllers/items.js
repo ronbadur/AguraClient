@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
             kind: req.body.kind,
             category: category,
             // create_time: Date.now(),
-            location: req.body.location,
+            city: req.body.city,
             username: req.body.username
         });
 
@@ -84,7 +84,7 @@ router.put('/:id', (req, res) => {
             result.description = req.body.description;
             result.color = req.body.color;
             result.create_time = req.body.create_time;
-            result.location = req.body.location;
+            result.city = req.body.city;
             result.save(err => {
                 if (err) {
                     res.json({ success: false, message: `Failed to save updated item. Error: ${err}` });
