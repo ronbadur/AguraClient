@@ -40,8 +40,8 @@ router.post('/', (req, res, next) => {
             username: req.body.username
         });
 
-        user.getUserByMail(req.body.username).then(userFound =>{
-             newItem.username = userFound._id;
+        user.getUserByUsername(req.body.username).then(userFound =>{
+            newItem.username = userFound._id;
             let username = req.body.username;
         
             newItem.save(err => {

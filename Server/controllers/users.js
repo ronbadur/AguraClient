@@ -15,9 +15,9 @@ router.get('/',(req,res) => {
     });
 });
 
-// GET HTTP method to /users/:mail/:password
-router.get('/:mail/:password',(req,res) => {
-    user.getUserByMailAndPassword(req.params.mail, req.params.password,(err, user)=> {
+// GET HTTP method to /users/:username/:password
+router.get('/:username/:password',(req,res) => {
+    user.getUserByUsernameAndPassword(req.params.username, req.params.password,(err, user)=> {
         if(err) {
             res.json({success:false, message: `Failed to find user. Error: ${err}`});
         }
