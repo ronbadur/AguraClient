@@ -16,16 +16,22 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/byUser/:user_id', (req, res) => {
-    item.getItemsByUser(req.params.user_id, (err, items) => {
+router.get('/byUser/:username', (req, res) => {
+   user.getUserByUsername(req.params.username,(err, user) =>
+  {          
+
+    item.getItemsByUser(user._id, (err, items) => {
         if (err) {
-            res.json({ success: false, message: `Failed to load items by user ${req.params.user_id}. Error: ${err}` });
+            res.json({ success: false, message: `Failed to load items by user ${req.params.username}. Error: ${err}` });
         }
         else {
             res.write(JSON.stringify({ success: true, items: items }, null, 2));
             res.end();
         }
     });
+})
+
+
 });
 
 router.post('/', (req, res, next) => {
