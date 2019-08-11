@@ -22,7 +22,12 @@ router.get('/:username/:password',(req,res) => {
             res.json({success:false, message: `Failed to find user. Error: ${err}`});
         }
         else {
-            res.write(JSON.stringify({ success: true, user: user }, null, 2));
+            if(user != null){
+                res.write(JSON.stringify({ success: true, user: user }, null, 2)); 
+            }
+            else{
+                res.write(JSON.stringify({ success: false, user: user }, null, 2)); 
+            }           
             res.end();
         }
     });
@@ -46,6 +51,7 @@ router.post('/', (req,res,next) => {
     let newUser = {
         password: req.body.password,
         fullName: req.body.fullName,
+        username: req.body.username,
         mail: req.body.mail,
         phone: req.body.phone,
         city: req.body.city,
