@@ -24,13 +24,15 @@ const port = 3000;
 // Middleware for CORS
 app.use(cors());
 
+// Middleware for bodyparsing using both json and urlencoding
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use('/api/users', users);
 app.use('/api/items', items);
 app.use('/api/categories', categories);
 
-// Middleware for bodyparsing using both json and urlencoding
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 
 var clients = [];
 global.clients = clients;
