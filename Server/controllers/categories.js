@@ -9,7 +9,8 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         }
         else {
-            res.sendStatus(200);
+            res.write(JSON.stringify({ success: true, categories: categories }, null, 2));
+            res.end();
         }
     });
 });
