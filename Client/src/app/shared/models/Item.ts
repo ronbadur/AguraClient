@@ -5,5 +5,6 @@ export interface Item {
     name: string;
     category: string;
     city: string;
+    description: string;
     owner?: User;
 }

@@ -20,7 +20,8 @@ export class TakeSomethingComponent implements OnInit {
           id: index,
           name: currItem.name,
           city: currItem.city,
-          category: currItem.category.name
+          category: currItem.category.name,
+          description: currItem.description
         };
         allItems.push(item);
       });

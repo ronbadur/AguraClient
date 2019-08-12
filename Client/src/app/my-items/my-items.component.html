@@ -7,4 +7,4 @@
   </div>
 </div>
 <hr>
-<items-table [items]="items" [isEditable]="true"></items-table>
+<app-items-table [items]="items" [isEditable]="true" (itemsChanged)="renderItems()" ></app-items-table>
