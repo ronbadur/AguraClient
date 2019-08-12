@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {MatTable, MatDialog, MatTableDataSource} from '@angular/material';
 import {Item} from '../shared/models/Item';
 import {ItemService} from '../shared/services/item/item.service';
@@ -7,21 +7,20 @@ import {UpdateItemDialogComponent} from '../update-item-dialog/update-item-dialo
 import {UserService} from '../shared/services/user/user.service';
 
 @Component({
-  selector: 'items-table',
+  selector: 'app-items-table',
   templateUrl: './items-table.component.html',
   styleUrls: ['./items-table.component.less']
 })
 export class ItemsTableComponent implements OnInit, OnChanges {
-
-  @ViewChild(MatTable) table: MatTable<any>;
   @Input() isEditable: boolean;
   @Input() items;
+  @Output() itemsChanged = new EventEmitter();
+
   dataSource;
-  displayedColumns: string[] = ['id', 'category', 'name', 'city'];
+  displayedColumns: string[] = ['name', 'category', 'city'];
   searchQuery: string;
 
-  constructor(private itemsService: ItemService, private router: Router, private dialogService: MatDialog,
-              private userService: UserService) {
+  constructor(private itemsService: ItemService, private router: Router, private dialogService: MatDialog) {
   }
 
   ngOnInit() {
@@ -36,13 +35,17 @@ export class ItemsTableComponent implements OnInit, OnChanges {
     }
   }
 
-  deleteItem(element) {
-    this.items = this.items.filter((currItem) => !(currItem.id === element.id));
-    this.dataSource.data = this.items;
+  deleteItem(item: Item) {
+    this.itemsService.deleteItem(item.id).subscribe((data) => {
+      const isSuccess = (data as any).success;
+      if (isSuccess) {
+        this.items = this.items.filter((currItem) => !(currItem.id === item.id));
+        this.dataSource.data = this.items;
+      }
+    });
   }
 
   editItem(element) {
-    this.itemsService.itemToUpdate = element;
     const dialogRef = this.dialogService.open(UpdateItemDialogComponent, {
       width: '600px',
       data: element
@@ -50,7 +53,7 @@ export class ItemsTableComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'update') {
-        this.table.renderRows();
+        this.itemsChanged.emit();
       }
     });
   }

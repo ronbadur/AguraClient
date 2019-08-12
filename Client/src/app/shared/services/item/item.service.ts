@@ -9,8 +9,6 @@ import {UserService} from '../user/user.service';
 })
 export class ItemService {
 
-  public itemToUpdate: Item;
-
   constructor(private http: HttpClient, private userService: UserService) { }
 
   fetchItemsByUsername(username: string) {
@@ -33,10 +31,10 @@ export class ItemService {
   }
 
   updateItem(item: Item) {
-    return null;
+    return this.http.put(environment.serverUrl + `/api/items/${item.id}`, item);
   }
 
   deleteItem(id) {
-    return null;
+    return this.http.delete(environment.serverUrl + `/api/items/${id}`);
   }
 }

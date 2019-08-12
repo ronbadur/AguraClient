@@ -41,15 +41,17 @@ export class ItemFormComponent implements OnInit {
 
   onSubmit() {
     this.itemService.addItem(this.itemForm.value).subscribe((data) => {
-      console.log(data);
       this.router.navigate(['/my-items']);
     });
   }
 
   updateItem() {
-    let itemToUpdate = this.itemForm.value;
-    itemToUpdate["id"] = this.itemDetails.id;
-    this.itemService.updateItem(itemToUpdate);
+    const itemToUpdate = this.itemForm.value;
+    itemToUpdate.id = this.itemDetails.id;
+    itemToUpdate.description = this.itemDetails.description;
+    this.itemService.updateItem(itemToUpdate).subscribe((data) => {
+      console.log(data);
+    });
   }
 
 }
