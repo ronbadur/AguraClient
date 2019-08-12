@@ -74,11 +74,6 @@ http.listen(port, () => {
   console.log(`Starting the server at port ${port}`);
 });
 
-//Listen to port 3000
-http.listen(port, () => {
-  console.log(`Starting the server at port ${port}`);
-});
-
 
 module.exports = app;
 
