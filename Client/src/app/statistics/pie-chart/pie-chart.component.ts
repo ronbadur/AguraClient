@@ -2,6 +2,8 @@ import { Component, OnInit, HostListener, ɵConsole } from '@angular/core';
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
+import {CategoryService} from "../../shared/services/category/category.service";
+import {ItemService} from "../../shared/services/item/item.service";
 
 @Component({
   selector: 'app-pie-chart',
@@ -10,25 +12,18 @@ import * as d3Shape from 'd3-shape';
 })
 export class PieChartComponent implements OnInit {
 
-  width = 0;
-  height = 500;
+  private categories = [];
 
   private margin = {top: 0, right: 0, bottom: 0, left: 0};
   private radius: number;
+  width = 0;
+  height = 500;
 
   private arc: any;
   private labelArc: any;
   private pie: any;
   private color: any;
   private svg: any;
-
-
-   data: any[] = [
-    {category: 'Phones', amount: 3},
-    {category: 'Furniture', amount: 3},
-    {category: 'Computers', amount: 2},
-    {category: 'Garden', amount: 4},
-  ];
 
   colors: Array<string> = [
     '#2ecc71',
@@ -37,11 +32,30 @@ export class PieChartComponent implements OnInit {
     '#f1c40f',
   ];
 
-  constructor() {
+  constructor(private categoryService: CategoryService, private itemService: ItemService) {
   }
 
   ngOnInit() {
+    this.categoryService.fetchAllCategories().subscribe((data) => {
+      (data as any).categories.forEach((currCategory) => {
+        this.categories.push(currCategory);
+      });
+      this.countAmountsOfEachCategory();
+    });
+  }
+
+  private countAmountsOfEachCategory() {
+    this.itemService.getItemsCategoryStatistics().subscribe((data) => {
+      for (const currCategory of this.categories) {
+        for (const categoryStat of (data as any).categories) {
+          if (categoryStat._id === currCategory._id) {
+            currCategory.amount = categoryStat.count;
+          }
+        }
+      }
+      console.log(this.categories);
       this.drawGraph();
+    });
   }
 
   private drawGraph() {
@@ -80,14 +94,14 @@ export class PieChartComponent implements OnInit {
 
   private drawPie() {
       const g = this.svg.selectAll('.arc')
-          .data(this.pie(this.data))
+          .data(this.pie(this.categories))
           .enter().append('g')
           .attr('class', 'arc');
       g.append('path').attr('d', this.arc)
-          .style('fill', (d: any) => this.color(d.data.category) );
+          .style('fill', (d: any) => this.color(d.data.name) );
       g.append('text').attr('transform', (d: any) => 'translate(' + this.labelArc.centroid(d) + ')')
           .attr('dy', '.35em')
-          .text((d: any) => d.data.category);
+          .text((d: any) => d.data.name);
   }
 
   @HostListener('window:resize') onResize() {

@@ -5,11 +5,19 @@ import {ItemService} from '../shared/services/item/item.service';
 import {Router} from '@angular/router';
 import {UpdateItemDialogComponent} from '../update-item-dialog/update-item-dialog.component';
 import {UserService} from '../shared/services/user/user.service';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-items-table',
   templateUrl: './items-table.component.html',
-  styleUrls: ['./items-table.component.less']
+  styleUrls: ['./items-table.component.less'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ItemsTableComponent implements OnInit, OnChanges {
   @Input() isEditable: boolean;
@@ -17,7 +25,8 @@ export class ItemsTableComponent implements OnInit, OnChanges {
   @Output() itemsChanged = new EventEmitter();
 
   dataSource;
-  displayedColumns: string[] = ['name', 'category', 'city'];
+  expandedElement = null;
+  columnsToDisplay: string[] = ['name', 'category', 'city'];
   searchQuery: string;
 
   constructor(private itemsService: ItemService, private router: Router, private dialogService: MatDialog) {
@@ -25,7 +34,7 @@ export class ItemsTableComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.isEditable) {
-      this.displayedColumns.push('actions');
+      this.columnsToDisplay.push('actions');
     }
   }
 

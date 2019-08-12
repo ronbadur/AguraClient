@@ -37,4 +37,8 @@ export class ItemService {
   deleteItem(id) {
     return this.http.delete(environment.serverUrl + `/api/items/${id}`);
   }
+
+  getItemsCategoryStatistics() {
+    return this.http.get(environment.serverUrl + `/api/items/getItemsAmountInEachCategory`);
+  }
 }

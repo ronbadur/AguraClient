@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
-import {Router} from "@angular/router";
-import {UserService} from "./shared/services/user/user.service";
+import {Router} from '@angular/router';
+import {UserService} from './shared/services/user/user.service';
 
 @Component({
   selector: 'app-root',
