@@ -2,13 +2,15 @@ const app = require("express")();
 const http = require('http').Server(app);
 const bodyParser = require("body-parser");
 const cors = require('cors');
-
+const io = require('socket.io')(http);
 const mongoose = require("mongoose");
 const config = require('./configs/db');
 const users = require('./controllers/users');
 const items = require('./controllers/items');
 
 const categories = require('./controllers/categories');
+
+global.io = io;
 
 // Connect mongoose to our database
 mongoose.connect(config.database, {useNewUrlParser: true});
@@ -36,6 +38,36 @@ app.use('/api/categories', categories);
 
 var clients = [];
 global.clients = clients;
+
+io.on('connection', socket => {
+  
+  console.log('user connected');
+
+  socket.on('sendUser', (id)=> {
+    clients.push({
+      id: id,
+      "socket": socket.id
+    });
+    
+    console.log(clients);
+
+  });
+  
+  socket.on('disconnect', function(){
+    var index = clients.find((client, i) => {
+      if (client.socket == socket.id) {
+        return i;
+      }
+    });
+
+    clients.splice(index, 1);
+    console.log(clients);
+
+    console.log('user disconnected');
+  });
+  
+
+});
 
 //Listen to port 3000
 http.listen(port, () => {
