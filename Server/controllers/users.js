@@ -55,7 +55,6 @@ router.post('/', (req,res,next) => {
         mail: req.body.mail,
         phone: req.body.phone,
         city: req.body.city,
-        admin: req.body.admin
     };
     
     user.editUser(newUser,(err, newUser) => {

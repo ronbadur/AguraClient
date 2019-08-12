@@ -8,7 +8,6 @@ const userSchema = Schema({
   mail: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
   city: { type: String, required: true },
-  admin: { type: Boolean, require: true },
   items: [{
     type: Schema.Types.ObjectId, ref: "item",
     default: () => { return []; },
