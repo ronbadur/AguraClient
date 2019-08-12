@@ -103,10 +103,39 @@ router.delete('/:id', (req, res) => {
         if (err)
             res.json({ success: false, message: `Failed to delete item. Error: ${err}` });
         else {
-            message.deleteMany({item: id}, err => { if(err) {console.log(err)} });
+            // TODO add after add messages
+            // message.deleteMany({item: id}, err => { if(err) {console.log(err)} });
             res.sendStatus(200);
         }    
     });
 });
+
+router.get('/search/:name-:kind-:category-:time', (req, res) => {
+    category.getCategoryByName(req.params.category).then(category_id => { 
+        var name = req.params.name;
+        var kind = req.params.kind;
+        var time = req.params.time;
+        if (time == 'undefined') {
+            time = {"$gte": new Date(1900, 1, 1)}
+        }
+        if (name == 'undefined') {
+            name = "";
+        }
+        item.find({name: new RegExp('.*'+name+'.*', "i"),
+        kind: kind,
+        category: category_id,
+        create_time: time
+        }).populate("category").populate("username").exec((err, items) => {
+            if(err){
+                res.json({ success: false, message: `Failed to load searced items. Error: ${err}` });
+            }
+            else {
+                res.write(JSON.stringify({ success: true, items: items }, null, 2));
+                res.end();
+            }
+        });
+    });  
+});
+
 
 module.exports = router;

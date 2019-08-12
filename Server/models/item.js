@@ -16,5 +16,5 @@ module.exports.getAllItems = (callback) => itemsList.find().populate("category")
 
 module.exports.getItemsByUser = (user_id, callback) => {
   let query = {username: user_id};
-  return ( itemsList.find(query).populate("category").populate("username").exec(callback) );
+  return ( itemsList.find(query).populate("category").exec(callback) );
 }
