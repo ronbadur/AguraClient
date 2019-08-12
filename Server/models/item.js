@@ -5,7 +5,6 @@ const itemSchema = Schema({
   description: { type: String, required: true },
   kind: { type: String, enum: ["Request", "ForDelivery"], required: true },
   category: { type: Schema.Types.ObjectId, ref: "category", required: true },
-  // create_time: { type: Date, required: true },
   city: { type: String, require: true },
   username: { type: Schema.Types.ObjectId, ref: "user", required: true }
 });
@@ -23,10 +22,9 @@ module.exports.getItemsAmountInEachCategory = () => {
     return itemsList.aggregate([
         {
             $group: {
-                _id: '$category',                
+                _id: '$category',
                 count: {$sum: 1}
             }
         }
     ]);
 }
-
