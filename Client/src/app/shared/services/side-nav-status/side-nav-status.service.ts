@@ -10,7 +10,6 @@ export class SideNavStatusService {
 
   changeSideNavStatus() {
     this.isSideNavOpen = !this.isSideNavOpen;
-    console.log('Status changed - ' + this.isSideNavOpen);
   }
 
   getSideNavStatus() {

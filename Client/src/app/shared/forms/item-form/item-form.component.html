@@ -7,9 +7,7 @@
 
     <mat-form-field>
       <mat-select placeholder="Category" formControlName="category">
-        <mat-option value="Phones">Phones</mat-option>
-        <mat-option value="Computers">Computers</mat-option>
-        <mat-option value="Furnitures">Furnitures</mat-option>
+        <mat-option *ngFor="let category of categories" value="{{category}}">{{category}}</mat-option>
       </mat-select>
     </mat-form-field>
 

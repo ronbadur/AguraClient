@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ItemService } from '../../services/item/item.service';
 import { Router } from '@angular/router';
 import { Item } from '../../models/Item';
+import {CategoryService} from "../../services/category/category.service";
 
 @Component({
   selector: 'item-form',
@@ -13,6 +14,7 @@ export class ItemFormComponent implements OnInit {
 
   @Input() isUpdate: boolean;
   @Input() itemDetails: Item;
+  categories: string[] = [];
 
   itemForm = new FormGroup({
     category: new FormControl(''),
@@ -20,9 +22,16 @@ export class ItemFormComponent implements OnInit {
     city: new FormControl(''),
   });
 
-  constructor(private itemService: ItemService, private router: Router) { }
+  constructor(private itemService: ItemService, private router: Router, private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.categoryService.fetchAllCategories().subscribe((data) => {
+      (data as any).categories.forEach((currCategory) => {
+        this.categories.push(currCategory.name);
+      });
+      console.log(this.categories);
+    });
+
     if (this.itemDetails) {
       this.itemForm.controls["category"].setValue(this.itemDetails.category);
       this.itemForm.controls["name"].setValue(this.itemDetails.name);
@@ -31,8 +40,10 @@ export class ItemFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.itemService.addItem(this.itemForm.value);
-    this.router.navigate(['/my-items']);
+    this.itemService.addItem(this.itemForm.value).subscribe((data) => {
+      console.log(data);
+      this.router.navigate(['/my-items']);
+    });
   }
 
   updateItem() {

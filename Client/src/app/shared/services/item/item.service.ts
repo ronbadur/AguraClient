@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core';
-import { ItemsMock } from '../../data/ItemsMock';
+import {HttpClient} from '@angular/common/http';
 import { Item } from '../../models/Item';
+import {environment} from '../../../../environments/environment';
+import {UserService} from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
 
-  idCounter = 4;
   public itemToUpdate: Item;
 
-  constructor(private mockData: ItemsMock) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   fetchItemsByUsername(username: string) {
-      return this.mockData.data;
+      return this.http.get(environment.serverUrl + `/api/items/byUser/${username}`);
   }
 
   fetchAllItems() {
-    return null;
+    return this.http.get(environment.serverUrl + `/api/items/`);
   }
 
   addItem(item: Item) {
-    this.mockData.data.push({
-      id: this.idCounter,
+    return this.http.post(environment.serverUrl + '/api/items', {
       name: item.name,
       category: item.category,
-      city: item.city
-    })
-    this.idCounter++;
+      city: item.city,
+      username: this.userService.username,
+      kind: 'ForDelivery',
+      description: 'No description'
+    });
   }
 
   updateItem(item: Item) {
-    let itemIndex = this.mockData.data.findIndex(currItem => currItem.id === this.itemToUpdate.id);
-    this.mockData.data[itemIndex] = item
+    return null;
+  }
+
+  deleteItem(id) {
+    return null;
   }
 }

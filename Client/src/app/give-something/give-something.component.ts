@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./give-something.component.less']
 })
 export class GiveSomethingComponent implements OnInit {
-  
   constructor() { }
 
   ngOnInit() {

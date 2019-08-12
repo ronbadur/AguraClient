@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {Router} from "@angular/router";
-import {UserLoggedInService} from "./shared/services/user-logged-in/user-logged-in.service";
+import {UserService} from "./shared/services/user/user.service";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import {UserLoggedInService} from "./shared/services/user-logged-in/user-logged-
 export class AppComponent implements OnInit {
   title = 'agura';
 
-  constructor(private router: Router, private sideNavStatusService: SideNavStatusService, private userLoggedInStatus: UserLoggedInService) {
+  constructor(private router: Router, private sideNavStatusService: SideNavStatusService, private userLoggedInStatus: UserService) {
   }
 
   ngOnInit() {
