@@ -105,12 +105,13 @@ router.delete('/:id', (req, res) => {
         else {
             // TODO add after add messages
             // message.deleteMany({item: id}, err => { if(err) {console.log(err)} });
-            res.sendStatus(200);
+            
+            res.json({ success: true, message: `Item deleted successfuly` });
         }    
     });
 });
 
-router.get('/search/:name-:kind-:category-:time', (req, res) => {
+router.get('/search/:name/:kind/:category/:time', (req, res) => {
     category.getCategoryByName(req.params.category).then(category_id => { 
         var name = req.params.name;
         var kind = req.params.kind;
