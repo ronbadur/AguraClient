@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const config = require('./configs/db');
 const users = require('./controllers/users');
 const items = require('./controllers/items');
+
 const categories = require('./controllers/categories');
 
 // Connect mongoose to our database
@@ -33,7 +34,6 @@ app.use('/api/items', items);
 app.use('/api/categories', categories);
 
 
-
 var clients = [];
 global.clients = clients;
 
@@ -41,7 +41,6 @@ global.clients = clients;
 http.listen(port, () => {
   console.log(`Starting the server at port ${port}`);
 });
-
 
 
 module.exports = app;

@@ -74,6 +74,18 @@ router.post('/', (req, res, next) => {
     })
 });
 
+router.get('/getItemsAmountInEachCategory',(req,res) => {
+    item.getItemsAmountInEachCategory().then((result,err) =>{
+        if(err){
+            console.error(err);
+            res.json({ success: false, message: `Failed to count items in each category. Error: ${err}. req: ${req}` });
+        }
+        else{
+            res.json({ success: true, categories: result });
+        }        
+    })        
+});
+
 router.put('/:id', (req, res) => {
     item.findById({_id: req.params.id}, (err, result) => {
         if (err) {

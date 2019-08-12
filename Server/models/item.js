@@ -18,3 +18,15 @@ module.exports.getItemsByUser = (user_id, callback) => {
   let query = {username: user_id};
   return ( itemsList.find(query).populate("category").exec(callback) );
 }
+
+module.exports.getItemsAmountInEachCategory = () => {
+    return itemsList.aggregate([
+        {
+            $group: {
+                _id: '$category',                
+                count: {$sum: 1}
+            }
+        }
+    ]);
+}
+
