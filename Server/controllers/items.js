@@ -80,18 +80,21 @@ router.put('/:id', (req, res) => {
             res.json({ success: false, message: `Failed to find item to update. Error: ${err}` });
         }
         else {
-            result.name = req.body.name;
-            result.description = req.body.description;
-            result.color = req.body.color;
-            result.create_time = req.body.create_time;
-            result.city = req.body.city;
-            result.save(err => {
-                if (err) {
-                    res.json({ success: false, message: `Failed to save updated item. Error: ${err}` });
-                }
-                else {
-                    res.json({ success: true, message: "Item updated successfully." });
-                }
+            category.getCategoryByName(req.body.category).then(categoryFound =>{
+                    result.name = req.body.name;
+                    result.description = req.body.description;
+                    result.color = req.body.color;
+                    result.category = categoryFound;
+                    result.create_time = req.body.create_time;
+                    result.city = req.body.city;
+                    result.save(err => {
+                    if (err) {
+                        res.json({ success: false, message: `Failed to save updated item. Error: ${err}` });
+                    }
+                    else {
+                        res.json({ success: true, message: "Item updated successfully." });
+                    }
+                })
             })
         }
     })
@@ -111,14 +114,11 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.get('/search/:name/:kind/:category/:time', (req, res) => {
+router.get('/search/:name/:kind/:category/', (req, res) => {
     category.getCategoryByName(req.params.category).then(category_id => { 
         var name = req.params.name;
         var kind = req.params.kind;
-        var time = req.params.time;
-        if (time == 'undefined') {
-            time = {"$gte": new Date(1900, 1, 1)}
-        }
+        
         if (name == 'undefined') {
             name = "";
         }
