@@ -13,13 +13,13 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {HttpClientModule} from '@angular/common/http';
+import { SignUpComponent } from './sign-up/sign-up.component';
 // import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    // LoginComponent,
   ],
   imports: [
     BrowserModule,
