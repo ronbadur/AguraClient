@@ -5,7 +5,6 @@ const userSchema = Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   fullName: { type: String, required: true },
-  mail: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
   city: { type: String, required: true },
   items: [{
@@ -33,11 +32,6 @@ module.exports.getUserByUsernameAndPassword = (username, password, callback) => 
   return (usersList.findOne(query).populate("items").exec(callback));
 }
 
-module.exports.getUserByMail = (mail, callback) => {
-    let query = { mail: mail };
-    return (usersList.findOne(query).populate("items").exec(callback));
-  }
-
 module.exports.getUserByID = (id, callback) => {
     let query = { _id: id };
     return (usersList.findOne(query).populate("items").exec(callback));
@@ -59,7 +53,6 @@ module.exports.addItemToUser = (item, username, callback) => {
       callback(err);
     }
     else {
-      // user.username = mail;
       user.items.push(item);
       user.save(callback);
     }

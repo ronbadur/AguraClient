@@ -52,7 +52,6 @@ router.post('/', (req,res,next) => {
         password: req.body.password,
         fullName: req.body.fullName,
         username: req.body.username,
-        mail: req.body.mail,
         phone: req.body.phone,
         city: req.body.city,
     };
