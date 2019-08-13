@@ -33,5 +33,6 @@ export class SignUpComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/']);
+    console.log('zibi');
   }
 }

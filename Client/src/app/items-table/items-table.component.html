@@ -29,8 +29,11 @@
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="example-element-description">
-          TODO - put here some shit about google maps and user information
+        <div class="contact-info">
+          <h2>Contact info:</h2>
+          <p> <strong> Name: </strong> {{element.owner.fullName}} </p>
+          <p> <strong>City: </strong> {{element.owner.city}} </p>
+          <p> <strong>Phone Number: </strong> {{element.owner.phone}} </p>
         </div>
       </div>
     </td>

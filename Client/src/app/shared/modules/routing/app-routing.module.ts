@@ -18,6 +18,8 @@ import { PieChartComponent } from '../../../statistics/pie-chart/pie-chart.compo
 import { LoginComponent } from '../../../login/login.component';
 import {SignUpComponent} from '../../../sign-up/sign-up.component';
 import {ContactComponent} from '../../../contact/contact.component';
+import {GooglePlaceModule} from "ngx-google-places-autocomplete";
+import {MessageComponent} from "../../../message/message.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -28,6 +30,7 @@ const routes: Routes = [
   { path: 'take-something', component: TakeSomethingComponent },
   { path: 'statistics', component: StatisticsComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'messages', component: MessageComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -45,9 +48,10 @@ const routes: Routes = [
     UpdateItemDialogComponent,
     ItemsTableComponent,
     PieChartComponent,
+    MessageComponent,
   ],
   entryComponents: [UpdateItemDialogComponent],
-  imports: [RouterModule.forRoot(routes), MaterialDesignModule, ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [RouterModule.forRoot(routes), MaterialDesignModule, ReactiveFormsModule, CommonModule, FormsModule, GooglePlaceModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
