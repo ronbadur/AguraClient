@@ -19,6 +19,10 @@ export class ItemService {
     return this.http.get(environment.serverUrl + `/api/items/`);
   }
 
+  fetchItemByCategory(category: string) {
+    return this.http.get(environment.serverUrl + `/api/items/byCateogry/${category}`);
+  }
+
   addItem(item: Item) {
     return this.http.post(environment.serverUrl + '/api/items', {
       name: item.name,
