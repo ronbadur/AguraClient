@@ -3,6 +3,7 @@ import {MessageService} from '../shared/services/message/message.service';
 import {Message} from '../shared/models/Message';
 import {UserService} from '../shared/services/user/user.service';
 import {MatDialog} from '@angular/material';
+import {CreateMessageDialogComponent} from '../create-message-dialog/create-message-dialog.component';
 
 @Component({
   selector: 'app-message',
@@ -25,15 +26,16 @@ export class MessageComponent implements OnInit {
   }
 
   writeMessage() {
-    // const dialogRef = this.dialog.open(CreateMessageDialogComponent, {data: this.item, height: '550px', width: '600px'});
-    //
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log( `Result: ${result}` )
-    //   // Refresh list
-    //   if (result) {
-    //     this.messageService.getMessagesByItem(this.item).subscribe(res => { this.messages = res.messages.sort(this.dateSort); });
-    //   }
-    // });
+    const dialogRef = this.dialog.open(CreateMessageDialogComponent, {height: '550px', width: '600px'});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log( `Result: ${result}` );
+
+      // Refresh list
+      if (result) {
+        // TODO: Refresh the list
+      }
+    });
   }
 
   dateSort(a, b) {

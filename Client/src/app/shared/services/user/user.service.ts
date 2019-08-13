@@ -20,6 +20,10 @@ export class UserService {
     return this.http.post(environment.serverUrl + `/api/users/`, user);
   }
 
+  getAllUsers() {
+    return this.http.get(environment.serverUrl + `/api/users`);
+  }
+
   changeUserLoggedInStatus() {
     this.isUserLoggedIn = !this.isUserLoggedIn;
   }
