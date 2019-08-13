@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const config = require('./configs/db');
 const users = require('./controllers/users');
 const items = require('./controllers/items');
+const messages = require('./controllers/messages');
 
 const categories = require('./controllers/categories');
 
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use('/api/users', users);
 app.use('/api/items', items);
 app.use('/api/categories', categories);
+app.use('/api/messages', messages)
 
 
 var clients = [];
