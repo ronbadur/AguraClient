@@ -6,8 +6,8 @@ const message = require('../models/message');
 
 router.post('/', async (req, res, next) => {
 
-    const destUser = await user.getUserByUsername(req.body.sourceUser);
-    const sourceUser = await user.getUserByUsername(req.body.destUser);
+    const destUser = await user.getUserByUsername(req.body.destUser);
+    const sourceUser = await user.getUserByUsername(req.body.sourceUser);
 
     let newMessage = new message({
         sourceUser: sourceUser,
