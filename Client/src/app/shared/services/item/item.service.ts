@@ -41,4 +41,8 @@ export class ItemService {
   getItemsCategoryStatistics() {
     return this.http.get(environment.serverUrl + `/api/items/getItemsAmountInEachCategory`);
   }
+
+  getItemsKindStatistics() {
+    return this.http.get(environment.serverUrl + `/api/items/getItemsAmountByKind`);
+  }
 }
