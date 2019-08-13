@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var ObjectId = require('mongoose').Types.ObjectId; 
+
 const itemSchema = Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -18,6 +20,19 @@ module.exports.getItemsByUser = (user_id, callback) => {
   return ( itemsList.find(query).populate("category").populate("username").exec(callback) );
 }
 
+
+module.exports.getItemByCategory = (category, callback) => {
+    let query = {category: new ObjectId(category)};
+    
+    itemsList.find(query).count().exec(function (err, count) {
+
+        var random = Math.floor(Math.random() * count);
+
+        return ( itemsList.find(query).find().limit(-1).skip(random).exec(callback));
+
+    });
+}
+  
 
 module.exports.getItemsAmountByKind = () => {
     return itemsList.aggregate([
