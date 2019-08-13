@@ -21,7 +21,9 @@ export class TakeSomethingComponent implements OnInit {
           name: currItem.name,
           city: currItem.city,
           category: currItem.category.name,
-          description: currItem.description
+          description: currItem.description,
+          owner: currItem.username
+
         };
         allItems.push(item);
       });

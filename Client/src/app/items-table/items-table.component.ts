@@ -76,4 +76,7 @@ export class ItemsTableComponent implements OnInit, OnChanges {
     this.dataSource.filter = this.searchQuery.trim().toLowerCase();
   }
 
+  tweet() {
+    console.log('zibi');
+  }
 }
