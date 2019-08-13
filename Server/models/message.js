@@ -6,9 +6,6 @@ const messageSchema = Schema({
     destUser: { type: Schema.Types.ObjectId, ref: "user", required: true },
     title: { type: String, require: true },
     content: { type: String, required: true },
-    create_time: { type: Date, required: true },
-    isRead: { type: Boolean, required: true },
-    item: { type: Schema.Types.ObjectId, ref: "item", required: true }
 });
 
 const messagesList = module.exports = mongoose.model("message", messageSchema);
@@ -18,7 +15,7 @@ module.exports.getMessagesByUsername = (username) => {
         let query = { destUser: username };
         messagesList.find(query)
             .populate("sourceUser")
-            .populate("destUser").populate("item").exec((err, messages) => {
+            .populate("destUser").exec((err, messages) => {
                 if (err) {
                     reject(new Error(err));
                 }
@@ -32,17 +29,11 @@ module.exports.getMessagesByUsername = (username) => {
 module.exports.totalMessagesAmount = (username) => {
     return new Promise((resolve, reject) => {
         messagesList.getMessagesByUsername(username).then(messages => {
-            resolve(messages.filter(message => (message.isRead == false)).map(msg => 1).reduce((sum, currentMsg) => sum + currentMsg));
+            resolve(messages.map(msg => 1).reduce((sum, currentMsg) => sum + currentMsg));
         }).catch(reject)
     })
 } 
 
-module.exports.getMessagesByItem = (item_id, callback) => {
-    let query = { item: item_id };
-    return (messagesList.find(query).populate("sourceUser").populate("destUser").exec(callback));
-}
-
-
 module.exports.getAllMessages = (callback) => {
-    return (messagesList.find().populate("sourceUser").populate("destUser").populate("item").exec(callback));
+    return (messagesList.find().populate("sourceUser").populate("destUser").exec(callback));
 } 

@@ -10,15 +10,13 @@ router.post('/', (req, res, next) => {
             sourceUser: req.body.sourceUser,
             destUser: req.body.destUser,
             title: req.body.title,
-            content: req.body.content,
-            create_time: new Date(),
-            isRead: false,
-            item: req.body.item
+            content: req.body.content
         });
+
         newMessage.save(err => {
             if (err) {
                 console.error(err);
-                res.json({ success: false, message: `Create a new Message failed. Error: ${err}. req: ${req}` });
+                res.json({ success: false, message: `Create a new Message failed, Error: ${err}. req: ${req}` });
             }
             else {
                 res.json({success:true, message: `Message Added successfully`, message: newMessage});
@@ -37,18 +35,6 @@ router.post('/', (req, res, next) => {
                 }
             }
         });
-});
-
-router.get('/:item_id', (req, res) => {
-    message.getMessagesByItem(req.params.item_id, (err, messages) => {
-        if(err) {
-            res.json({success:false, message: `Find messages by ID Failed. Error: ${err}`});
-        }
-        else {
-            res.write(JSON.stringify({ success: true, messages: messages }, null, 2));
-            res.end();
-        }
-    })
 });
 
 router.get('/byUser/:username', (req, res) => {
@@ -72,25 +58,6 @@ router.get('/amount/:username', (req, res) => {
             console.error(err);
             res.json({ amount: 0 });
         })
-});
-
-router.put('/markAsRead/:id', (req, res) => {
-    message.findById({_id: req.params.id}, (err, result) => {
-        if (err) {
-            res.json({ success: false, message: `Failed to find message to update. Error: ${err}` });
-        }
-        else {
-            result.isRead = true;
-            result.save((err) => {
-                if (err) {
-                    res.json({ success: false, message: `Failed to save updated message. Error: ${err}` });
-                }
-                else {
-                    res.json({ success: true, message: "Message marked as read successfully." });
-                }
-            })
-        }
-    })
 });
 
 router.get('/all/all', (req, res) => {
