@@ -20,22 +20,27 @@
       <td mat-cell *matCellDef="let element">
         <mat-icon (click)="editItem(element)">edit</mat-icon>
         <mat-icon (click)="deleteItem(element)">delete</mat-icon>
-        <span class="ion ion-md-logo-twitter" (click)="tweet()"></span>
+<!--        <span class="ion ion-logo-twitter" (click)="tweet()"></span>-->
 <!--        <a href="https://twitter.com/intent/tweet?screen_name=agura&text=Look at my product!" class="twitter-mention-button" data-show-count="false"><img style="height: 17px;width: 20px;" src="../assets/media/twitter.jpg"/></a>-->
       </td>
     </div>
   </ng-container>
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+   Expanded Content Column - The detail row is made up of this one column that spans across all columns
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="contact-info">
+        <div class="contact-info" *ngIf="element.owner">
           <h2>Contact info:</h2>
           <p> <strong> Name: </strong> {{element.owner.fullName}} </p>
           <p> <strong>City: </strong> {{element.owner.city}} </p>
           <p> <strong>Phone Number: </strong> {{element.owner.phone}} </p>
+        </div>
+
+        <div class="contact-info" *ngIf="!element.owner">
+          Tweet about it ->
+           <a href="https://twitter.com/intent/tweet?screen_name=agura&text=Look at my product!" class="twitter-mention-button" data-show-count="false"><img style="height: 17px;width: 20px;" src="../assets/media/twitter.jpg"/></a>
         </div>
       </div>
     </td>
