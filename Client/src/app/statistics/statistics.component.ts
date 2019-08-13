@@ -11,6 +11,7 @@ import {ItemService} from "../shared/services/item/item.service";
 export class StatisticsComponent implements OnInit {
   private amountOfItemsInEachCategory = [];
   private amountOfItemsInEachKind = [];
+  private trigger = '';
   categoriesColors: Array<string> = [
     '#2ecc71',
     '#e74c3c',
@@ -31,13 +32,10 @@ export class StatisticsComponent implements OnInit {
 
       // amount of each category
       this.categoryService.fetchAllCategories().subscribe((data) => {
-        const tempArray:string[] = [];
         (data as any).categories.forEach((currCategory) => {
-          tempArray.push(currCategory);
+          this.amountOfItemsInEachCategory.push(currCategory);
         });
-        this.amountOfItemsInEachCategory = tempArray;
         this.countAmountsOfEachCategory();
-        
       });
 
     // amount of each kind
@@ -60,6 +58,7 @@ export class StatisticsComponent implements OnInit {
             }
           }
         }
+        this.trigger = 'triger';
       });
 
 
