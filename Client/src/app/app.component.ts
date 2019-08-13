@@ -19,12 +19,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   var url = "http://api.openweathermap.org/data/2.5/weather?q=jerusalem&APPID=65252e392715d7598a0c9c5ca14e4243&units=metric";
-  console.log("im here");
   this.http.get(url).subscribe((data) => {
-      this.weather= (data as any).main.temp;
-      
+      this.weather= (data as any).main.temp; 
   });
-
-
   }
 }
