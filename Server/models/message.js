@@ -12,6 +12,7 @@ const messagesList = module.exports = mongoose.model("message", messageSchema);
 
 module.exports.getMessagesByUsername = (username) => {
     return new Promise((resolve, reject) => {
+        
         let query = { destUser: username };
         messagesList.find(query)
             .populate("sourceUser")
