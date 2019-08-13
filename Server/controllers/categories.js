@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const category = require('../models/category');
+const item = require('../models/item');
 
 router.get('/', (req, res) => {
     category.find((err, categories) => {
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
     });
 });
 
+ 
 router.post('/', (req, res, next) => {
     let newCategory = new category({
         name: req.body.name

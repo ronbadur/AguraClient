@@ -17,21 +17,31 @@ router.get('/', (req, res) => {
 });
 
 router.get('/byUser/:username', (req, res) => {
-   user.getUserByUsername(req.params.username,(err, user) =>
-  {          
+    user.getUserByUsername(req.params.username, (err, user) => {
 
-    item.getItemsByUser(user._id, (err, items) => {
+        item.getItemsByUser(user._id, (err, items) => {
+            if (err) {
+                res.json({ success: false, message: `Failed to load items by user ${req.params.username}. Error: ${err}` });
+            }
+            else {
+                res.write(JSON.stringify({ success: true, items: items }, null, 2));
+                res.end();
+            }
+        });
+    })
+});
+
+router.get('/byCateogry/:category', (req, res) => {
+
+    item.getItemByCategory(req.params.category, (err, item) => {
         if (err) {
-            res.json({ success: false, message: `Failed to load items by user ${req.params.username}. Error: ${err}` });
+            res.json({ success: false, message: `Failed to get item by category. Error: ${err}` });
         }
         else {
-            res.write(JSON.stringify({ success: true, items: items }, null, 2));
+            res.write(JSON.stringify({ success: true, item: item }, null, 2));
             res.end();
         }
     });
-})
-
-
 });
 
 router.post('/', (req, res, next) => {
@@ -46,10 +56,10 @@ router.post('/', (req, res, next) => {
             username: req.body.username
         });
 
-        user.getUserByUsername(req.body.username).then(userFound =>{
+        user.getUserByUsername(req.body.username).then(userFound => {
             newItem.username = userFound._id;
             let username = req.body.username;
-        
+
             newItem.save(err => {
                 if (err) {
                     console.error(err);
@@ -71,44 +81,44 @@ router.post('/', (req, res, next) => {
     })
 });
 
-router.get('/getItemsAmountInEachCategory',(req,res) => {
-    item.getItemsAmountInEachCategory().then((result,err) =>{
-        if(err){
+router.get('/getItemsAmountInEachCategory', (req, res) => {
+    item.getItemsAmountInEachCategory().then((result, err) => {
+        if (err) {
             console.error(err);
             res.json({ success: false, message: `Failed to count items in each category. Error: ${err}. req: ${req}` });
         }
-        else{
+        else {
             res.json({ success: true, categories: result });
-        }        
-    })        
+        }
+    })
 });
 
-router.get('/getItemsAmountByKind',(req,res) => {
-    item.getItemsAmountByKind().then((result,err) =>{
-        if(err){
+router.get('/getItemsAmountByKind', (req, res) => {
+    item.getItemsAmountByKind().then((result, err) => {
+        if (err) {
             console.error(err);
             res.json({ success: false, message: `Failed to count items in each category. Error: ${err}. req: ${req}` });
         }
-        else{
+        else {
             res.json({ success: true, items: result });
-        }        
-    })        
+        }
+    })
 });
 
 router.put('/:id', (req, res) => {
-    item.findById({_id: req.params.id}, (err, result) => {
+    item.findById({ _id: req.params.id }, (err, result) => {
         if (err) {
             res.json({ success: false, message: `Failed to find item to update. Error: ${err}` });
         }
         else {
-            category.getCategoryByName(req.body.category).then(categoryFound =>{
-                    result.name = req.body.name;
-                    result.description = req.body.description;
-                    result.color = req.body.color;
-                    result.category = categoryFound;
-                    result.create_time = req.body.create_time;
-                    result.city = req.body.city;
-                    result.save(err => {
+            category.getCategoryByName(req.body.category).then(categoryFound => {
+                result.name = req.body.name;
+                result.description = req.body.description;
+                result.color = req.body.color;
+                result.category = categoryFound;
+                result.create_time = req.body.create_time;
+                result.city = req.body.city;
+                result.save(err => {
                     if (err) {
                         res.json({ success: false, message: `Failed to save updated item. Error: ${err}` });
                     }
@@ -129,35 +139,35 @@ router.delete('/:id', (req, res) => {
         else {
             // TODO add after add messages
             // message.deleteMany({item: id}, err => { if(err) {console.log(err)} });
-            
+
             res.json({ success: true, message: `Item deleted successfuly` });
-        }    
+        }
     });
 });
 
 router.get('/search/:name/:kind/:category/', (req, res) => {
-    category.getCategoryByName(req.params.category).then(category_id => { 
+    category.getCategoryByName(req.params.category).then(category_id => {
         var name = req.params.name;
         var kind = req.params.kind;
-        
+
         if (name == 'undefined') {
             name = "";
         }
         item.find(
-        {
-            name: new RegExp('.*'+name+'.*', "i"),
-            kind: kind,
-            category: category_id,
-        }).populate("category").populate("username").exec((err, items) => {
-            if(err){
-                res.json({ success: false, message: `Failed to load searced items. Error: ${err}` });
-            }
-            else {
-                res.write(JSON.stringify({ success: true, items: items }, null, 2));
-                res.end();
-            }
-        });
-    });  
+            {
+                name: new RegExp('.*' + name + '.*', "i"),
+                kind: kind,
+                category: category_id,
+            }).populate("category").populate("username").exec((err, items) => {
+                if (err) {
+                    res.json({ success: false, message: `Failed to load searced items. Error: ${err}` });
+                }
+                else {
+                    res.write(JSON.stringify({ success: true, items: items }, null, 2));
+                    res.end();
+                }
+            });
+    });
 });
 
 
