@@ -10,8 +10,8 @@ router.post('/', async (req, res, next) => {
     const sourceUser = await user.getUserByUsername(req.body.destUser);
 
     let newMessage = new message({
-        sourceUser: req.body.sourceUser,
-        destUser: req.body.destUser,
+        sourceUser: sourceUser,
+        destUser: destUser,
         title: req.body.title,
         content: req.body.content
     });
