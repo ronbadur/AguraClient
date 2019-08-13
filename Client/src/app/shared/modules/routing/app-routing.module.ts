@@ -17,6 +17,7 @@ import { ItemsTableComponent } from 'src/app/items-table/items-table.component';
 import { PieChartComponent } from '../../../statistics/pie-chart/pie-chart.component';
 import { LoginComponent } from '../../../login/login.component';
 import {SignUpComponent} from '../../../sign-up/sign-up.component';
+import {ContactComponent} from '../../../contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'give-something', component: GiveSomethingComponent },
   { path: 'take-something', component: TakeSomethingComponent },
   { path: 'statistics', component: StatisticsComponent },
+  { path: 'contact', component: ContactComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

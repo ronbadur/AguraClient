@@ -14,12 +14,14 @@ import { LoginComponent } from './login/login.component';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {HttpClientModule} from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ContactComponent } from './contact/contact.component';
 // import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
