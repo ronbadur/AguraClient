@@ -1,7 +1,9 @@
+import {User} from './User';
+
 export interface Message {
   _id: number;
-  sourceUser: string;
-  destUser: string;
+  sourceUser: User;
+  destUser: User;
   title: string;
   content: string;
 }

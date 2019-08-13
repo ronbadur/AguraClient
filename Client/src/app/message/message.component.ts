@@ -18,7 +18,9 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.getMessagesByUser(this.userService.username).subscribe((data) => {
-      console.log(data);
+      (data as any).messages.forEach((currMessage) => {
+        this.messages.push(currMessage);
+      });
     });
   }
 
