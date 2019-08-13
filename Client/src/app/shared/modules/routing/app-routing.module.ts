@@ -18,8 +18,9 @@ import { PieChartComponent } from '../../../statistics/pie-chart/pie-chart.compo
 import { LoginComponent } from '../../../login/login.component';
 import {SignUpComponent} from '../../../sign-up/sign-up.component';
 import {ContactComponent} from '../../../contact/contact.component';
-import {GooglePlaceModule} from "ngx-google-places-autocomplete";
-import {MessageComponent} from "../../../message/message.component";
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import {MessageComponent} from '../../../message/message.component';
+import {CreateMessageDialogComponent} from '../../../create-message-dialog/create-message-dialog.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -49,8 +50,9 @@ const routes: Routes = [
     ItemsTableComponent,
     PieChartComponent,
     MessageComponent,
+    CreateMessageDialogComponent,
   ],
-  entryComponents: [UpdateItemDialogComponent],
+  entryComponents: [UpdateItemDialogComponent, CreateMessageDialogComponent],
   imports: [RouterModule.forRoot(routes), MaterialDesignModule, ReactiveFormsModule, CommonModule, FormsModule, GooglePlaceModule],
   exports: [RouterModule]
 })

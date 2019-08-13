@@ -11,9 +11,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
+import {FormsModule} from "@angular/forms";
 
 
 const MaterialComponents = [
+  FormsModule,
   MatButtonModule,
   MatSidenavModule,
   MatTableModule,

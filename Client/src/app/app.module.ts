@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
+import { CreateMessageDialogComponent } from './create-message-dialog/create-message-dialog.component';
 // import {FormsModule} from '@angular/forms'
 
 @NgModule({
