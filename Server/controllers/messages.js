@@ -4,7 +4,10 @@ const item = require('../models/item');
 const user = require('../models/user');
 const message = require('../models/message');
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
+
+    const destUser = await user.getUserByUsername(req.body.sourceUser);
+    const sourceUser = await user.getUserByUsername(req.body.destUser);
 
     let newMessage = new message({
         sourceUser: req.body.sourceUser,
