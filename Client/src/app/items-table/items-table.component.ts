@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import {MatTable, MatDialog, MatTableDataSource} from '@angular/material';
-import {Item} from '../shared/models/Item';
-import {ItemService} from '../shared/services/item/item.service';
-import {Router} from '@angular/router';
-import {UpdateItemDialogComponent} from '../update-item-dialog/update-item-dialog.component';
-import {UserService} from '../shared/services/user/user.service';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { MatTable, MatDialog, MatTableDataSource } from '@angular/material';
+import { Item } from '../shared/models/Item';
+import { ItemService } from '../shared/services/item/item.service';
+import { Router } from '@angular/router';
+import { UpdateItemDialogComponent } from '../update-item-dialog/update-item-dialog.component';
+import { UserService } from '../shared/services/user/user.service';
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-items-table',
@@ -13,8 +13,8 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   styleUrls: ['./items-table.component.less'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -79,4 +79,47 @@ export class ItemsTableComponent implements OnInit, OnChanges {
   tweet() {
     console.log('zibi');
   }
+
+  countCategory(element) {
+    console.log(element);
+
+    var categoryCounterCookie = this.getCookieData('categoryCounter');
+    
+    var categoryCounter = {};
+
+    if (categoryCounterCookie) {
+      categoryCounter = JSON.parse(categoryCounterCookie);
+    }
+
+    if (categoryCounter.hasOwnProperty(element.category)) {
+      categoryCounter[element.category] += 1;
+    }
+    else {
+      categoryCounter[element.category] = 1;
+    }
+
+    this.setCookie('categoryCounter', JSON.stringify(categoryCounter), 14);
+  }
+
+  getCookieData(name) {
+    var pairs = document.cookie.split("; "),
+      count = pairs.length, parts;
+    while (count--) {
+      parts = pairs[count].split("=");
+      if (parts[0] === name)
+        return parts[1];
+    }
+    return false;
+  }
+
+  setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
 }
