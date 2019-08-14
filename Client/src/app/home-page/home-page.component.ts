@@ -9,7 +9,7 @@ import {ItemService} from '../shared/services/item/item.service';
 })
 export class HomePageComponent implements OnInit {
 
-  item: Item;
+  item: Item = {} as Item;
 
   constructor(private itemsService: ItemService) { }
 
@@ -19,27 +19,26 @@ export class HomePageComponent implements OnInit {
 
     var categoryCounterCookie = this.getCookieData('categoryCounter');
 
-    this.item.name = 'default';
-
     if (categoryCounterCookie) {
       var categoryCounter = JSON.parse(categoryCounterCookie);
 
-      selectedCategory = Object.keys(categoryCounter).reduce((a, b) => categoryCounter[a] > categoryCounter[b] ? a : b);
+        selectedCategory = Object.keys(categoryCounter).reduce((a, b) => categoryCounter[a] > categoryCounter[b] ? a : b);
+      
+
+      this.itemsService.fetchItemByCategory(selectedCategory).subscribe((data : any) => {
+        const allItems = [];
+          const itemToAdd: Item = {
+            name: data.item[0].name,
+            city: data.item[0].city,
+            category: data.item[0].category,
+            description: data.item[0].description,
+            owner: data.item[0].username
+
+          };
+          
+        this.item = itemToAdd;
+      });
     }
-
-    this.itemsService.fetchItemByCategory(selectedCategory).subscribe((data : any) => {
-      const allItems = [];
-        const itemToAdd: Item = {
-          name: data.name,
-          city: data.city,
-          category: data.category.name,
-          description: data.description,
-          owner: data.username
-
-        };
-         
-       this.item = itemToAdd;
-     });
   }
 
 
