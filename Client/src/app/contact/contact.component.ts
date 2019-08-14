@@ -19,19 +19,19 @@ export class ContactComponent implements OnInit {
   public pageTitle: string = "Map";
 
   ngAfterViewInit(){  // after the view completes initializaion, create the map
-    const  map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
-        credentials: 'Bing Map Key - I removed it here'
-    
-    });
-    map.setView({
-      // mapTypeId: Microsoft.Maps.MapTypeId.road,
-     center: new Microsoft.Maps.Location(31.970575, 34.767812),
-      zoom: 15
-  });
-    var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
-    var layer = new Microsoft.Maps.Layer();
-    layer.add(pushpin);
-    map.layers.insert(layer);
+  //   const  map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
+  //       credentials: 'Bing Map Key - I removed it here'
+  //
+  //   });
+  //   map.setView({
+  //     // mapTypeId: Microsoft.Maps.MapTypeId.road,
+  //    center: new Microsoft.Maps.Location(31.970575, 34.767812),
+  //     zoom: 15
+  // });
+  //   var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+  //   var layer = new Microsoft.Maps.Layer();
+  //   layer.add(pushpin);
+  //   map.layers.insert(layer);
   }
   ngOnInit(){
 

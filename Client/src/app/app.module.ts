@@ -8,13 +8,10 @@ import { MaterialDesignModule } from './shared/modules/material-design/material-
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ItemService } from './shared/services/item/item.service';
-import { ItemsTableComponent } from './items-table/items-table.component';
 import { FooterComponent } from './footer/footer.component';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
-import { CreateMessageDialogComponent } from './create-message-dialog/create-message-dialog.component';
-// import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [

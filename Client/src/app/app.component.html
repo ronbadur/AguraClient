@@ -32,7 +32,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <a *ngIf="userLoggedInStatus.isUserLoggedIn" class="logout-button" href="#" (click)="logout()">Logout</a>
+    <a *ngIf="userLoggedInStatus.isUserLoggedIn" class="logout-button" href="#">Logout</a>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>

@@ -7,7 +7,7 @@ import {environment} from "../../../../environments/environment";
   providedIn: 'root'
 })
 export class UserService {
-  isUserLoggedIn = false;
+  isUserLoggedIn = true;
   username: string;
 
   constructor(private http: HttpClient) { }
@@ -34,5 +34,25 @@ export class UserService {
 
   setUsername(username: string) {
     this.username = username;
+  }
+
+  getUsername() {
+    if (!this.username) {
+      return this.getCookieData('connectedUser');
+    }
+
+    return  this.username;
+  }
+
+
+  getCookieData(name) {
+    var pairs = document.cookie.split("; "),
+      count = pairs.length, parts;
+    while (count--) {
+      parts = pairs[count].split("=");
+      if (parts[0] === name)
+        return parts[1];
+    }
+    return false;
   }
 }

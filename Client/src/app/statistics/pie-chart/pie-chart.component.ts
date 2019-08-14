@@ -11,8 +11,8 @@ import {ItemService} from "../../shared/services/item/item.service";
   styleUrls: ['./pie-chart.component.less']
 })
 export class PieChartComponent implements OnInit, OnChanges {
-@Input() categories; 
-@Input() colors; 
+@Input() categories;
+@Input() colors;
 @Input() trigger;
   // private categories = [];
 

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.isUserLoggedIn = false;
   }
 
   login(): void {
@@ -23,10 +24,21 @@ export class LoginComponent implements OnInit {
       if (isLoginSucceed) {
         this.userService.changeUserLoggedInStatus();
         this.userService.setUsername((data as any).user.username);
+        this.setCookie('connectedUser', (data as any).user.username, 100);
         this.router.navigate(['home']);
       } else {
         alert('Invalid credentials');
       }
     });
+  }
+
+  setCookie(name, value, days) {
+    let expires = '';
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = '; expires=' + date.toUTCString();
+    }
+    document.cookie = name + '=' + (value || '') + expires + '; path=/';
   }
 }
