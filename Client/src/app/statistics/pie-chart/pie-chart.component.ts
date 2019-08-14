@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ɵConsole } from '@angular/core';
+import {Component, OnInit, HostListener, ɵConsole, Input, SimpleChanges, OnChanges} from '@angular/core';
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
@@ -10,9 +10,11 @@ import {ItemService} from "../../shared/services/item/item.service";
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.less']
 })
-export class PieChartComponent implements OnInit {
-
-  private categories = [];
+export class PieChartComponent implements OnInit, OnChanges {
+@Input() categories; 
+@Input() colors; 
+@Input() trigger;
+  // private categories = [];
 
   private margin = {top: 0, right: 0, bottom: 0, left: 0};
   private radius: number;
@@ -24,40 +26,28 @@ export class PieChartComponent implements OnInit {
   private pie: any;
   private color: any;
   private svg: any;
-
+/*
   colors: Array<string> = [
     '#2ecc71',
     '#e74c3c',
     '#3498db',
     '#f1c40f',
-  ];
+  ];*/
 
   constructor(private categoryService: CategoryService, private itemService: ItemService) {
   }
 
   ngOnInit() {
-    this.categoryService.fetchAllCategories().subscribe((data) => {
-      (data as any).categories.forEach((currCategory) => {
-        this.categories.push(currCategory);
-      });
-      this.countAmountsOfEachCategory();
-    });
+   // this.drawGraph();
   }
 
-  private countAmountsOfEachCategory() {
-    this.itemService.getItemsCategoryStatistics().subscribe((data) => {
-      for (const currCategory of this.categories) {
-        for (const categoryStat of (data as any).categories) {
-          if (categoryStat._id === currCategory._id) {
-            currCategory.amount = categoryStat.count;
-          }
-        }
-      }
-      console.log(this.categories);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.trigger && !changes.trigger.firstChange) {
+      console.log("drawing graph");
       this.drawGraph();
-    });
+    }
   }
-
+  
   private drawGraph() {
       d3.select('svg.pie').selectAll('g').remove();
       this.initSvg();
