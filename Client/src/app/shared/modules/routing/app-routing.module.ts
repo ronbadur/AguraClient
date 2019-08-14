@@ -21,6 +21,7 @@ import {ContactComponent} from '../../../contact/contact.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {MessageComponent} from '../../../message/message.component';
 import {CreateMessageDialogComponent} from '../../../create-message-dialog/create-message-dialog.component';
+import { LogoComponent } from  '../../../logo/logo.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
     UpdateItemDialogComponent,
     ItemsTableComponent,
     PieChartComponent,
+    LogoComponent,
     MessageComponent,
     CreateMessageDialogComponent,
   ],
