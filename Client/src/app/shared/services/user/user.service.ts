@@ -7,7 +7,7 @@ import {environment} from "../../../../environments/environment";
   providedIn: 'root'
 })
 export class UserService {
-  isUserLoggedIn = true;
+  isUserLoggedIn = window.location.pathname !== '/' ? true : false;
   username: string;
 
   constructor(private http: HttpClient) { }

@@ -28,7 +28,7 @@ export class ItemService {
       name: item.name,
       category: item.category,
       city: item.city,
-      username: this.userService.username,
+      username: this.userService.getUsername(),
       kind: 'ForDelivery',
       description: 'No description'
     });

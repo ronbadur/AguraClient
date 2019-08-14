@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.messageService.getMessagesByUser(this.userService.username).subscribe((data) => {
+    this.messageService.getMessagesByUser(this.userService.getUsername()).subscribe((data) => {
       (data as any).messages.forEach((currMessage) => {
         this.messages.push(currMessage);
       });

@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   url = 'http://api.openweathermap.org/data/2.5/weather?q=jerusalem&APPID=65252e392715d7598a0c9c5ca14e4243&units=metric';
 
 
-  constructor(private router: Router, private sideNavStatusService: SideNavStatusService, private userLoggedInStatus: UserService,private http: HttpClient) {
+  constructor(private router: Router, private sideNavStatusService: SideNavStatusService, private userService: UserService, private http: HttpClient) {
   }
 
   ngOnInit() {

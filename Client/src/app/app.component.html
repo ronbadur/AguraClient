@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [(opened)]="userLoggedInStatus.isUserLoggedIn">
+  <mat-sidenav mode="side" [(opened)]="userService.isUserLoggedIn">
     <aside>
       <a routerLink="/home">
         <h2>Agura</h2>
@@ -32,7 +32,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <a *ngIf="userLoggedInStatus.isUserLoggedIn" class="logout-button" href="#">Logout</a>
+    <a *ngIf="userService.isUserLoggedIn" class="logout-button" href="#">Logout</a>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   </mat-sidenav-content>
