@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
     });
     map.setView({
       // mapTypeId: Microsoft.Maps.MapTypeId.road,
-      // center: new Microsoft.Maps.Location(31.970575, 34.767812),
+     center: new Microsoft.Maps.Location(31.970575, 34.767812),
       zoom: 15
   });
     var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
