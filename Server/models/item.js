@@ -22,7 +22,8 @@ module.exports.getItemsByUser = (user_id, callback) => {
 
 
 module.exports.getItemByCategory = (category, callback) => {
-    let query = {category: new ObjectId(category)};
+    //let query = {category: new ObjectId(category)};
+    let query = {category: category};
     
     itemsList.find(query).count().exec(function (err, count) {
 

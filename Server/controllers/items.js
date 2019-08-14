@@ -31,9 +31,11 @@ router.get('/byUser/:username', (req, res) => {
     })
 });
 
-router.get('/byCateogry/:category', (req, res) => {
+router.get('/byCateogry/:category', async (req, res) => {
 
-    item.getItemByCategory(req.params.category, (err, item) => {
+    var categoryId = await category.getCategoryByName(req.params.category);
+
+    item.getItemByCategory(categoryId, (err, item) => {
         if (err) {
             res.json({ success: false, message: `Failed to get item by category. Error: ${err}` });
         }
