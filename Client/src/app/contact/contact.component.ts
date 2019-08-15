@@ -11,7 +11,7 @@ import { getMatInputUnsupportedTypeError } from '@angular/material';
     <div #myMap style='width: 500px; height: 500px;'></div> 
   </div>`
     ,*/
-    templateUrl: './contact.component.html',
+    templateUrl: './contact.component.html', 
   styleUrls: ['./contact.component.less']
 })
 export class ContactComponent implements OnInit {

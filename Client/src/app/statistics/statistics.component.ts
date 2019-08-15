@@ -10,7 +10,7 @@ import {ItemService} from "../shared/services/item/item.service";
 
 export class StatisticsComponent implements OnInit {
   private amountOfItemsInEachCategory = [];
-  private amountOfItemsInEachKind = [];
+  
   private trigger = '';
   categoriesColors: Array<string> = [
     '#2ecc71',
@@ -19,10 +19,7 @@ export class StatisticsComponent implements OnInit {
     '#f1c40f',
   ];
 
-  kindColors: Array<string> = [
-    '#3498db',
-    '#f1c40f',
-  ];
+
 
     constructor(private categoryService: CategoryService, private itemService: ItemService){
 
@@ -38,14 +35,7 @@ export class StatisticsComponent implements OnInit {
         this.countAmountsOfEachCategory();
       });
 
-    // amount of each kind
-    this.itemService.getItemsKindStatistics().subscribe((data)=>{
-      const tempArray:any[]= [];
-      for (const currKind of (data as any).items) {
-        tempArray.push({name : currKind._id, amount: currKind.count})
-      }
-      this.amountOfItemsInEachKind = tempArray;
-    });
+
 
     }
 

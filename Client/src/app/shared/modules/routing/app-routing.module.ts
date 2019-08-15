@@ -22,6 +22,7 @@ import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {MessageComponent} from '../../../message/message.component';
 import {CreateMessageDialogComponent} from '../../../create-message-dialog/create-message-dialog.component';
 import { LogoComponent } from  '../../../logo/logo.component';
+import { SystemStatsComponent } from 'src/app/system-stats/system-stats.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'give-something', component: GiveSomethingComponent },
   { path: 'take-something', component: TakeSomethingComponent },
   { path: 'statistics', component: StatisticsComponent },
+  { path: 'system-stats', component: SystemStatsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'messages', component: MessageComponent },
   { path: '**', component: PageNotFoundComponent }
@@ -53,6 +55,7 @@ const routes: Routes = [
     LogoComponent,
     MessageComponent,
     CreateMessageDialogComponent,
+    SystemStatsComponent
   ],
   entryComponents: [UpdateItemDialogComponent, CreateMessageDialogComponent],
   imports: [RouterModule.forRoot(routes), MaterialDesignModule, ReactiveFormsModule, CommonModule, FormsModule, GooglePlaceModule],

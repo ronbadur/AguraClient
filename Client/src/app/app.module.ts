@@ -14,6 +14,7 @@ import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-s
 import {HttpClientModule} from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
 import { CreateMessageDialogComponent } from './create-message-dialog/create-message-dialog.component';
+import { SystemStatsComponent } from './system-stats/system-stats.component';
 // import {FormsModule} from '@angular/forms'
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CreateMessageDialogComponent } from './create-message-dialog/create-mes
     AppComponent,
     FooterComponent,
     ContactComponent,
+    
   ],
   imports: [
     BrowserModule,
