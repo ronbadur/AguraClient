@@ -12,12 +12,9 @@ import { FooterComponent } from './footer/footer.component';
 import {SideNavStatusService} from './shared/services/side-nav-status/side-nav-status.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
-<<<<<<< HEAD
 import { CreateMessageDialogComponent } from './create-message-dialog/create-message-dialog.component';
 import { SystemStatsComponent } from './system-stats/system-stats.component';
 // import {FormsModule} from '@angular/forms'
-=======
->>>>>>> 885392a066ab29af3cf1ca33d2ff941365a1e970
 
 @NgModule({
   declarations: [
