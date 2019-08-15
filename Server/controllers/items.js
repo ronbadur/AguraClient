@@ -147,20 +147,32 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.get('/search/:name/:kind/:category/', (req, res) => {
-    category.getCategoryByName(req.params.category).then(category_id => {
-        var name = req.params.name;
-        var kind = req.params.kind;
+
+    router.get('/search/',async (req, res) => {
+
+        var name = req.body.name;
+        var kind = req.body.kind;
+        var categoryName = req.body.category;
+        let query = {};
 
         if (name == 'undefined') {
             name = "";
         }
-        item.find(
-            {
-                name: new RegExp('.*' + name + '.*', "i"),
-                kind: kind,
-                category: category_id,
-            }).populate("category").populate("username").exec((err, items) => {
+    
+        if(name != 'undefined'){
+            query.name = new RegExp('.*' + name + '.*', "i");
+        }
+   
+        if(req.body.kind != 'undefined'){   
+            query.kind = kind;
+        }   
+
+        if(req.body.category != 'undefined'){   
+            let category_id = await category.getCategoryByName(categoryName);
+            query.category = category_id;
+        }    
+
+        item.find(query).populate("category").populate("username").exec((err, items) => {
                 if (err) {
                     res.json({ success: false, message: `Failed to load searced items. Error: ${err}` });
                 }
@@ -169,7 +181,7 @@ router.get('/search/:name/:kind/:category/', (req, res) => {
                     res.end();
                 }
             });
-    });
+    
 });
 
 
