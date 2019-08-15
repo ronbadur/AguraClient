@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import {CategoryService} from "../shared/services/category/category.service";
-import {ItemService} from "../shared/services/item/item.service";
+import {Component, OnInit} from '@angular/core';
+import {CategoryService} from '../shared/services/category/category.service';
+import {ItemService} from '../shared/services/item/item.service';
 
 @Component({
   selector: 'app-statistics',
@@ -21,39 +21,37 @@ export class StatisticsComponent implements OnInit {
 
 
 
-    constructor(private categoryService: CategoryService, private itemService: ItemService){
+  constructor(private categoryService: CategoryService, private itemService: ItemService) {
 
-    }
+  }
 
-    ngOnInit(){
+  ngOnInit() {
 
-      // amount of each category
-      this.categoryService.fetchAllCategories().subscribe((data) => {
-        (data as any).categories.forEach((currCategory) => {
-          this.amountOfItemsInEachCategory.push(currCategory);
-        });
-        this.countAmountsOfEachCategory();
+    // amount of each category
+    this.categoryService.fetchAllCategories().subscribe((data) => {
+      (data as any).categories.forEach((currCategory) => {
+        this.amountOfItemsInEachCategory.push(currCategory);
       });
+      this.countAmountsOfEachCategory();
+    });
 
 
+  }
 
-    }
-
-    private countAmountsOfEachCategory() {
-      this.itemService.getItemsCategoryStatistics().subscribe((data) => {
-        for (const currCategory of this.amountOfItemsInEachCategory) {
-          for (const categoryStat of (data as any).categories) {
-            if (categoryStat._id === currCategory._id) {
-              currCategory.amount = categoryStat.count;
-            }
+  private countAmountsOfEachCategory() {
+    this.itemService.getItemsCategoryStatistics().subscribe((data) => {
+      for (const currCategory of this.amountOfItemsInEachCategory) {
+        for (const categoryStat of (data as any).categories) {
+          if (categoryStat._id === currCategory._id) {
+            currCategory.amount = categoryStat.count;
           }
         }
-        this.trigger = 'triger';
-      });
+      }
+      this.trigger = 'triger';
+    });
 
 
-
-    }
+  }
 }
 
 

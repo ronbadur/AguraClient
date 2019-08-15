@@ -28,7 +28,7 @@ export class MyItemsComponent implements OnInit {
   }
 
   fetchItemsByUsername() {
-    this.itemsService.fetchItemsByUsername(this.userService.username).subscribe((data) => {
+    this.itemsService.fetchItemsByUsername(this.userService.getUsername()).subscribe((data) => {
       const userItems = [];
       (data as any).items.forEach((currItem) => {
         const item: Item = {

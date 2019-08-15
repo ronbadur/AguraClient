@@ -16,12 +16,12 @@ private context: CanvasRenderingContext2D;
 private element: HTMLImageElement;
 
 src: string;
-imgWidth: number
-imgHeight: number
+imgWidth: number;
+imgHeight: number;
 
 constructor() {
-  this.imgWidth = 400;
-  this.imgHeight = 400;
+  this.imgWidth = 200;
+  this.imgHeight = 200;
   //this.src = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png';
   this.src = '../assets/media/Agura Logo.png';
 }
